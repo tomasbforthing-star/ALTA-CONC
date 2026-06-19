@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Alta de Concesionarios – Forthing Argentina</title>
+    
+    <!-- Google Fonts: Outfit (headings) and Inter (body) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Link to custom styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Top Sticky Header -->
+    <header class="main-header">
+        <div class="header-container">
+            <div class="logo-wrapper">
+                <img src="LOGO PARA TEMA OSCURO.png" alt="Forthing Argentina Logo" class="brand-logo">
+            </div>
+            <div class="header-progress-container">
+                <span class="progress-text">Progreso: <span id="progress-percentage">0%</span></span>
+                <div class="progress-bar-outer">
+                    <div class="progress-bar-inner" id="main-progress-bar"></div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main class="portal-container">
+        
+        <!-- Welcome Hero/Banner -->
+        <section class="hero-section">
+            <h1 class="hero-title">ALTA DE CONCESIONARIO OFICIAL</h1>
+            <p class="hero-subtitle">Complete la información solicitada para iniciar el proceso de evaluación e incorporación a la Red Oficial Forthing Argentina.</p>
+        </section>
+
+        <!-- Main Workspace Grid -->
+        <div class="workspace-grid">
+            
+            <!-- Sidebar Navigation (Desktop Stepper) -->
+            <aside class="sidebar-stepper">
+                <nav class="stepper-nav" id="sidebar-nav">
+                    <ul>
+                        <li class="step-item active" data-target="sec-datos-generales">
+                            <span class="step-number">1</span>
+                            <span class="step-label">Datos Generales</span>
+                        </li>
+                        <li class="step-item" data-target="sec-experiencia-comercial">
+                            <span class="step-number">2</span>
+                            <span class="step-label">Experiencia Comercial</span>
+                        </li>
+                        <li class="step-item" data-target="sec-capacidad-operativa">
+                            <span class="step-number">3</span>
+                            <span class="step-label">Capacidad Operativa</span>
+                        </li>
+                        <li class="step-item" data-target="sec-superficies">
+                            <span class="step-number">4</span>
+                            <span class="step-label">Superficies</span>
+                        </li>
+                        <li class="step-item" data-target="sec-personal">
+                            <span class="step-number">5</span>
+                            <span class="step-label">Personal</span>
+                        </li>
+                        <li class="step-item" data-target="sec-registro-fotografico">
+                            <span class="step-number">6</span>
+                            <span class="step-label">Registro Fotográfico</span>
+                        </li>
+                        <li class="step-item" data-target="sec-observaciones">
+                            <span class="step-number">7</span>
+                            <span class="step-label">Observaciones</span>
+                        </li>
+                    </ul>
+                </nav>
+            </aside>
+
+            <!-- Scrollable Form Container -->
+            <div class="form-wrapper">
+                <form id="onboarding-form" novalidate autocomplete="off">
+                    
+                    <!-- SECTION 1: Datos Generales -->
+                    <section id="sec-datos-generales" class="form-card-section" data-step="1">
+                        <div class="section-header">
+                            <div class="section-icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="3" x2="9" y2="21"></line></svg>
+                            </div>
+                            <div>
+                                <h2 class="section-title">DATOS GENERALES DEL CONCESIONARIO</h2>
+                                <p class="section-desc">Identificación legal y contacto principal de la empresa.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid">
+                            <div class="input-group">
+                                <label for="nombre-concesionario" class="required-label">Nombre del Concesionario</label>
+                                <input type="text" id="nombre-concesionario" name="nombre_concesionario" required placeholder="Ej. Forthing Libertador">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="razon-social" class="required-label">Razón Social Legal</label>
+                                <input type="text" id="razon-social" name="razon_social" required placeholder="Ej. Soluciones Automotrices S.A.">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="cuit" class="required-label">CUIT</label>
+                                <input type="text" id="cuit" name="cuit" required placeholder="30-12345678-9" pattern="\d{2}-\d{8}-\d{1}">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="direccion-legal" class="required-label">Dirección Legal</label>
+                                <input type="text" id="direccion-legal" name="direccion_legal" required placeholder="Ej. Av. del Libertador 1500">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="ciudad" class="required-label">Ciudad</label>
+                                <input type="text" id="ciudad" name="ciudad" required placeholder="Ej. Florida">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="provincia" class="required-label">Provincia</label>
+                                <select id="provincia" name="provincia" required>
+                                    <option value="" disabled selected>Seleccione una provincia...</option>
+                                    <option value="Buenos Aires">Buenos Aires</option>
+                                    <option value="CABA">CABA</option>
+                                    <option value="Catamarca">Catamarca</option>
+                                    <option value="Chaco">Chaco</option>
+                                    <option value="Chubut">Chubut</option>
+                                    <option value="Córdoba">Córdoba</option>
+                                    <option value="Corrientes">Corrientes</option>
+                                    <option value="Entre Ríos">Entre Ríos</option>
+                                    <option value="Formosa">Formosa</option>
+                                    <option value="Jujuy">Jujuy</option>
+                                    <option value="La Pampa">La Pampa</option>
+                                    <option value="La Rioja">La Rioja</option>
+                                    <option value="Mendoza">Mendoza</option>
+                                    <option value="Misiones">Misiones</option>
+                                    <option value="Neuquén">Neuquén</option>
+                                    <option value="Río Negro">Río Negro</option>
+                                    <option value="Salta">Salta</option>
+                                    <option value="San Juan">San Juan</option>
+                                    <option value="San Luis">San Luis</option>
+                                    <option value="Santa Cruz">Santa Cruz</option>
+                                    <option value="Santa Fe">Santa Fe</option>
+                                    <option value="Santiago del Estero">Santiago del Estero</option>
+                                    <option value="Tierra del Fuego">Tierra del Fuego</option>
+                                    <option value="Tucumán">Tucumán</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="telefono-principal" class="required-label">Teléfono Principal</label>
+                                <input type="tel" id="telefono-principal" name="telefono_principal" required placeholder="Ej. +54 11 4789 1234">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="email-principal" class="required-label">Correo Electrónico Principal</label>
+                                <input type="email" id="email-principal" name="email_principal" required placeholder="Ej. contacto@concesionario.com.ar">
+                            </div>
+                            
+                            <div class="input-group full-width-tablet">
+                                <label for="sitio-web">Sitio Web</label>
+                                <input type="url" id="sitio-web" name="sitio_web" placeholder="Ej. https://www.concesionario.com.ar">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 2: Experiencia Comercial -->
+                    <section id="sec-experiencia-comercial" class="form-card-section" data-step="2">
+                        <div class="section-header">
+                            <div class="section-icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            </div>
+                            <div>
+                                <h2 class="section-title">EXPERIENCIA COMERCIAL</h2>
+                                <p class="section-desc">Trayectoria y portfolio de marcas o tipos de vehículos que comercializa actualmente.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-layout-stacked">
+                            <div class="input-group">
+                                <label for="otras-marcas">Otras marcas actualmente representadas</label>
+                                <textarea id="otras-marcas" name="otras_marcas" rows="4" placeholder="Enumere y describa brevemente las marcas automotrices u otras marcas representadas por su grupo empresarial..."></textarea>
+                            </div>
+                            
+                            <div class="checkbox-container-wrapper">
+                                <span class="checkbox-group-title">Tipos de vehículos actualmente comercializados</span>
+                                <div class="checkbox-grid">
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="Automóviles">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Automóviles</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="SUV">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">SUV</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="Camiones">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Camiones</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="Pick-Ups">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Pick-Ups</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="Motocicletas">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Motocicletas</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="Repuestos">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Repuestos</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="Taller Mecánico">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Taller Mecánico</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" name="tipo_vehiculo" value="Vehículos Comerciales">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Vehículos Comerciales</span>
+                                    </label>
+                                    
+                                    <label class="custom-checkbox">
+                                        <input type="checkbox" id="chk-otros" name="tipo_vehiculo" value="Otros">
+                                        <span class="checkmark"></span>
+                                        <span class="checkbox-label">Otros</span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <!-- Conditional input field for 'Otros' -->
+                            <div class="input-group input-conditional" id="wrapper-otros-especificar">
+                                <label for="otros-especificar" class="required-label">Especifique otros tipos de vehículos</label>
+                                <input type="text" id="otros-especificar" name="otros_especificar" placeholder="Ej. Maquinaria Agrícola, Náutica...">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 3: Capacidad Operativa -->
+                    <section id="sec-capacidad-operativa" class="form-card-section" data-step="3">
+                        <div class="section-header">
+                            <div class="section-icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"></path></svg>
+                            </div>
+                            <div>
+                                <h2 class="section-title">CAPACIDAD OPERATIVA</h2>
+                                <p class="section-desc">Detalle de la dotación y capacidad instalada de taller y servicios.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-grid text-fields-numeric">
+                            <div class="input-group">
+                                <label for="cant-empleados">Cantidad total de empleados</label>
+                                <input type="number" id="cant-empleados" name="cant_empleados" min="0" placeholder="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="cant-tecnicos">Cantidad de técnicos certificados</label>
+                                <input type="number" id="cant-tecnicos" name="cant_tecnicos" min="0" placeholder="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="cant-puestos">Cantidad de puestos de taller</label>
+                                <input type="number" id="cant-puestos" name="cant_puestos" min="0" placeholder="0">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="cant-elevadores">Cantidad de elevadores</label>
+                                <input type="number" id="cant-elevadores" name="cant_elevadores" min="0" placeholder="0">
+                            </div>
+                            
+                            <div class="input-group full-width-tablet">
+                                <label for="capacidad-servicios">Capacidad mensual estimada de servicios</label>
+                                <input type="number" id="capacidad-servicios" name="capacidad_servicios" min="0" placeholder="Ej. Cantidad de autos atendidos por mes">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 4: Superficies -->
+                    <section id="sec-superficies" class="form-card-section" data-step="4">
+                        <div class="section-header">
+                            <div class="section-icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
+                            </div>
+                            <div>
+                                <h2 class="section-title">SUPERFICIES</h2>
+                                <p class="section-desc">Dimensiones en metros cuadrados (m²) de los diferentes sectores edilicios del concesionario.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="superficies-grid">
+                            <!-- Salesroom Card -->
+                            <div class="superficie-card">
+                                <div class="sup-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19V5"/></svg>
+                                </div>
+                                <div class="sup-card-content">
+                                    <label for="sup-salon">Salón de Ventas</label>
+                                    <div class="unit-input-wrapper">
+                                        <input type="number" id="sup-salon" class="sup-input" name="sup_salon" min="0" placeholder="0">
+                                        <span class="unit-tag">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Workshop Card -->
+                            <div class="superficie-card">
+                                <div class="sup-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
+                                </div>
+                                <div class="sup-card-content">
+                                    <label for="sup-taller">Taller Mecánico</label>
+                                    <div class="unit-input-wrapper">
+                                        <input type="number" id="sup-taller" class="sup-input" name="sup_taller" min="0" placeholder="0">
+                                        <span class="unit-tag">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Parts Storage Card -->
+                            <div class="superficie-card">
+                                <div class="sup-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                                </div>
+                                <div class="sup-card-content">
+                                    <label for="sup-deposito">Depósito de Repuestos</label>
+                                    <div class="unit-input-wrapper">
+                                        <input type="number" id="sup-deposito" class="sup-input" name="sup_deposito" min="0" placeholder="0">
+                                        <span class="unit-tag">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Admin Area Card -->
+                            <div class="superficie-card">
+                                <div class="sup-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
+                                </div>
+                                <div class="sup-card-content">
+                                    <label for="sup-admin">Área Administrativa</label>
+                                    <div class="unit-input-wrapper">
+                                        <input type="number" id="sup-admin" class="sup-input" name="sup_admin" min="0" placeholder="0">
+                                        <span class="unit-tag">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Aftersales Area Card -->
+                            <div class="superficie-card">
+                                <div class="sup-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                </div>
+                                <div class="sup-card-content">
+                                    <label for="sup-postventa">Área de Postventa</label>
+                                    <div class="unit-input-wrapper">
+                                        <input type="number" id="sup-postventa" class="sup-input" name="sup_postventa" min="0" placeholder="0">
+                                        <span class="unit-tag">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Total Area Card (Result) -->
+                            <div class="superficie-card total-card">
+                                <div class="sup-card-icon">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="9" y1="9" x2="15" y2="15"></line><line x1="15" y1="9" x2="9" y2="15"></line></svg>
+                                </div>
+                                <div class="sup-card-content">
+                                    <label for="sup-total">Superficie Total</label>
+                                    <div class="unit-input-wrapper">
+                                        <input type="number" id="sup-total" name="sup_total" readonly placeholder="0" value="0">
+                                        <span class="unit-tag">m²</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 5: Personal del Concesionario -->
+                    <section id="sec-personal" class="form-card-section" data-step="5">
+                        <div class="section-header">
+                            <div class="section-icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                            </div>
+                            <div>
+                                <h2 class="section-title">PERSONAL DEL CONCESIONARIO</h2>
+                                <p class="section-desc">Nomina del personal directivo, administrativo, de ventas y operativo.</p>
+                            </div>
+                        </div>
+
+                        <!-- Responsive Table wrapper -->
+                        <div class="table-responsive-wrapper">
+                            <table class="editable-table" id="personal-table">
+                                <thead>
+                                    <tr>
+                                        <th>Cargo</th>
+                                        <th>Nombre y Apellido</th>
+                                        <th>Correo Electrónico</th>
+                                        <th>Teléfono</th>
+                                        <th class="actions-col">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="personal-table-body">
+                                    <!-- Dynamic rows will be preloaded via JS or hardcoded for SEO/Static structure. Let's write them statically first to ensure immediate premium rendering -->
+                                    <tr data-cargo="Presidente" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Presidente" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Gerente Comercial" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Gerente Comercial" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Responsable de Ventas" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Responsable de Ventas" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Vendedor" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Vendedor" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Responsable Administrativo" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Responsable Administrativo" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Responsable de Repuestos" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Responsable de Repuestos" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Responsable de Postventa" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Responsable de Postventa" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Mecánico" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Mecánico" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Mecánico" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                    <tr data-cargo="Mecánico" class="table-row">
+                                        <td>
+                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
+                                        </td>
+                                        <td>
+                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
+                                        </td>
+                                        <td>
+                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
+                                        </td>
+                                        <td>
+                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
+                                        </td>
+                                        <td class="actions-col">
+                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="table-actions-container">
+                            <button type="button" id="btn-add-personal" class="btn-secondary">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"></line><line x1="5" y1="12" x2="19" y2="12"></line></svg>
+                                Agregar Personal
+                            </button>
+                        </div>
+                    </section>
+
+                    <!-- SECTION 6: Registro Fotográfico de Instalaciones -->
+                    <section id="sec-registro-fotografico" class="form-card-section" data-step="6">
+                        <div class="section-header">
+                            <div class="section-icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+                            </div>
+                            <div>
+                                <h2 class="section-title">REGISTRO FOTOGRÁFICO DE INSTALACIONES (OPCIONAL)</h2>
+                                <p class="section-desc">Documente visualmente las áreas clave del concesionario. Formato JPG, PNG, WEBP. Max. 10 MB. Si no se adjuntan fotos, la solicitud se podrá enviar igual.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="photo-uploader-grid">
+                            
+                            <!-- Card: Frente del Concesionario -->
+                            <div class="uploader-card" data-category="frente">
+                                <div class="uploader-card-header">
+                                    <span class="uploader-card-title">Frente del Concesionario</span>
+                                </div>
+                                <div class="dropzone" id="dropzone-frente">
+                                    <input type="file" id="file-frente" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <div class="dropzone-prompt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                        <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
+                                        <p class="dropzone-limits">JPG, PNG o WEBP (máx. 10 MB)</p>
+                                    </div>
+                                    <div class="preview-container">
+                                        <img src="" alt="Vista previa Frente" class="preview-img">
+                                        <div class="preview-actions">
+                                            <button type="button" class="btn-action-preview btn-replace-img" title="Reemplazar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                                Reemplazar
+                                            </button>
+                                            <button type="button" class="btn-action-preview btn-delete-img" title="Eliminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card: Salón de Ventas -->
+                            <div class="uploader-card" data-category="salon">
+                                <div class="uploader-card-header">
+                                    <span class="uploader-card-title">Salón de Ventas</span>
+                                </div>
+                                <div class="dropzone" id="dropzone-salon">
+                                    <input type="file" id="file-salon" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <div class="dropzone-prompt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                        <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
+                                        <p class="dropzone-limits">JPG, PNG o WEBP (máx. 10 MB)</p>
+                                    </div>
+                                    <div class="preview-container">
+                                        <img src="" alt="Vista previa Salón" class="preview-img">
+                                        <div class="preview-actions">
+                                            <button type="button" class="btn-action-preview btn-replace-img" title="Reemplazar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                                Reemplazar
+                                            </button>
+                                            <button type="button" class="btn-action-preview btn-delete-img" title="Eliminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card: Taller Mecánico -->
+                            <div class="uploader-card" data-category="taller">
+                                <div class="uploader-card-header">
+                                    <span class="uploader-card-title">Taller Mecánico</span>
+                                </div>
+                                <div class="dropzone" id="dropzone-taller">
+                                    <input type="file" id="file-taller" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <div class="dropzone-prompt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                        <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
+                                        <p class="dropzone-limits">JPG, PNG o WEBP (máx. 10 MB)</p>
+                                    </div>
+                                    <div class="preview-container">
+                                        <img src="" alt="Vista previa Taller" class="preview-img">
+                                        <div class="preview-actions">
+                                            <button type="button" class="btn-action-preview btn-replace-img" title="Reemplazar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                                Reemplazar
+                                            </button>
+                                            <button type="button" class="btn-action-preview btn-delete-img" title="Eliminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card: Depósito de Repuestos -->
+                            <div class="uploader-card" data-category="deposito">
+                                <div class="uploader-card-header">
+                                    <span class="uploader-card-title">Depósito de Repuestos</span>
+                                </div>
+                                <div class="dropzone" id="dropzone-deposito">
+                                    <input type="file" id="file-deposito" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <div class="dropzone-prompt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                        <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
+                                        <p class="dropzone-limits">JPG, PNG o WEBP (máx. 10 MB)</p>
+                                    </div>
+                                    <div class="preview-container">
+                                        <img src="" alt="Vista previa Depósito" class="preview-img">
+                                        <div class="preview-actions">
+                                            <button type="button" class="btn-action-preview btn-replace-img" title="Reemplazar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                                Reemplazar
+                                            </button>
+                                            <button type="button" class="btn-action-preview btn-delete-img" title="Eliminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card: Área de Postventa -->
+                            <div class="uploader-card" data-category="postventa">
+                                <div class="uploader-card-header">
+                                    <span class="uploader-card-title">Área de Postventa</span>
+                                </div>
+                                <div class="dropzone" id="dropzone-postventa">
+                                    <input type="file" id="file-postventa" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <div class="dropzone-prompt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                        <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
+                                        <p class="dropzone-limits">JPG, PNG o WEBP (máx. 10 MB)</p>
+                                    </div>
+                                    <div class="preview-container">
+                                        <img src="" alt="Vista previa Postventa" class="preview-img">
+                                        <div class="preview-actions">
+                                            <button type="button" class="btn-action-preview btn-replace-img" title="Reemplazar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                                Reemplazar
+                                            </button>
+                                            <button type="button" class="btn-action-preview btn-delete-img" title="Eliminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Card: Área Administrativa -->
+                            <div class="uploader-card" data-category="administrativa">
+                                <div class="uploader-card-header">
+                                    <span class="uploader-card-title">Área Administrativa</span>
+                                </div>
+                                <div class="dropzone" id="dropzone-administrativa">
+                                    <input type="file" id="file-administrativa" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <div class="dropzone-prompt">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
+                                        <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
+                                        <p class="dropzone-limits">JPG, PNG o WEBP (máx. 10 MB)</p>
+                                    </div>
+                                    <div class="preview-container">
+                                        <img src="" alt="Vista previa Admin" class="preview-img">
+                                        <div class="preview-actions">
+                                            <button type="button" class="btn-action-preview btn-replace-img" title="Reemplazar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                                                Reemplazar
+                                            </button>
+                                            <button type="button" class="btn-action-preview btn-delete-img" title="Eliminar">
+                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
+                                                Eliminar
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </section>
+
+                    <!-- SECTION 7: Observaciones Adicionales -->
+                    <section id="sec-observaciones" class="form-card-section" data-step="7">
+                        <div class="section-header">
+                            <div class="section-icon-wrapper">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path></svg>
+                            </div>
+                            <div>
+                                <h2 class="section-title">OBSERVACIONES ADICIONALES</h2>
+                                <p class="section-desc">Ingrese cualquier información adicional relevante para la evaluación.</p>
+                            </div>
+                        </div>
+                        
+                        <div class="form-layout-stacked">
+                            <div class="input-group">
+                                <textarea id="observaciones" name="observaciones" rows="5" placeholder="Ingrese cualquier información adicional que considere relevante para la evaluación de su solicitud."></textarea>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Submit Button Container -->
+                    <div class="submit-action-container">
+                        <button type="submit" id="btn-submit-form" class="btn-primary-corporate">
+                            ENVIAR SOLICITUD
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Success Modal -->
+    <div class="modal-backdrop" id="success-modal">
+        <div class="modal-content">
+            <div class="modal-success-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+            </div>
+            <h3 class="modal-title">Solicitud Registrada</h3>
+            <p class="modal-message">Su solicitud ha sido registrada correctamente y se encuentra lista para ser procesada.</p>
+            <div class="modal-actions">
+                <a href="#" id="btn-download-pdf" class="btn-primary-corporate" download>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                    DESCARGAR ALTA
+                </a>
+                <button type="button" id="btn-close-modal" class="btn-secondary">Aceptar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Script loading -->
+    <script src="app.js"></script>
+</body>
+</html>

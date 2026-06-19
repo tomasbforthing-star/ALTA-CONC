@@ -1,0 +1,19 @@
+# Configuración local (Contiene datos sensibles)
+.env
+.env.*
+
+# Caché de Python y Entornos Virtuales
+__pycache__/
+*.pyc
+venv/
+.venv/
+env/
+
+# Carpetas de datos locales y backups (Privacidad de datos de clientes)
+sent_emails/
+temp_submissions/
+submissions_state.json
+*.pdf
+
+# Logs
+*.log
