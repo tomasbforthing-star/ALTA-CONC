@@ -583,7 +583,26 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 // Update the download PDF button link
                 const downloadPdfBtn = document.getElementById('btn-download-pdf');
-                if (downloadPdfBtn && resData.pdf_filename) {
+                if (downloadPdfBtn && resData.pdf_base64) {
+                    try {
+                        const byteCharacters = atob(resData.pdf_base64);
+                        const byteNumbers = new Array(byteCharacters.length);
+                        for (let i = 0; i < byteCharacters.length; i++) {
+                            byteNumbers[i] = byteCharacters.charCodeAt(i);
+                        }
+                        const byteArray = new Uint8Array(byteNumbers);
+                        const blob = new Blob([byteArray], { type: 'application/pdf' });
+                        const blobUrl = URL.createObjectURL(blob);
+                        
+                        downloadPdfBtn.href = blobUrl;
+                        downloadPdfBtn.download = resData.pdf_filename || "Alta_Concesionario.pdf";
+                        downloadPdfBtn.style.display = 'inline-flex';
+                    } catch (e) {
+                        console.error("Error creating PDF blob:", e);
+                        downloadPdfBtn.href = `/api/download/${encodeURIComponent(resData.pdf_filename)}`;
+                        downloadPdfBtn.style.display = 'inline-flex';
+                    }
+                } else if (downloadPdfBtn && resData.pdf_filename) {
                     downloadPdfBtn.href = `/api/download/${encodeURIComponent(resData.pdf_filename)}`;
                     downloadPdfBtn.style.display = 'inline-flex';
                 }

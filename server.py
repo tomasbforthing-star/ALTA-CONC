@@ -23,13 +23,33 @@ BACKUP_FOLDER = "/tmp/temp_submissions"
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 TEMPLATE_PDF = os.path.join(BASE_DIR, "alta_concesionario.pdf")
 
+STATE_FILE = "/tmp/submissions_state.json"
+
 def get_next_solicitud_nro():
     """
-    Returns a formatted solicitud number like FTH-YYYYMMDD-HHMMSS.
-    (Vercel is stateless, so we use a timestamp-based ID instead of a counter file).
+    Returns a formatted solicitud number like FTH-YYYY-0001.
     """
     now = datetime.now()
-    return f"FTH-{now.strftime('%Y%m%d-%H%M%S')}"
+    year = now.strftime('%Y')
+    
+    counter = 1
+    if os.path.exists(STATE_FILE):
+        try:
+            with open(STATE_FILE, 'r') as f:
+                state = json.load(f)
+                if state.get('year') == year:
+                    counter = state.get('last_count', 0) + 1
+        except Exception:
+            pass
+            
+    # Save new state
+    try:
+        with open(STATE_FILE, 'w') as f:
+            json.dump({'year': year, 'last_count': counter}, f)
+    except Exception:
+        pass
+        
+    return f"FTH-{year}-{counter:04d}"
 
 
 def save_backup_payload(solicitud_nro, data):
@@ -123,10 +143,20 @@ def submit_onboarding():
         email_error_msg = str(email_err)
         logging.warning(f"Submission {solicitud_nro} generated PDF successfully, but SMTP email dispatch failed: {email_err}. Backup EML saved locally.")
         
+    import base64
+    pdf_base64 = ""
+    try:
+        if os.path.exists(output_pdf_path):
+            with open(output_pdf_path, "rb") as pdf_file:
+                pdf_base64 = base64.b64encode(pdf_file.read()).decode('utf-8')
+    except Exception as e:
+        logging.error(f"Failed to encode PDF to base64: {e}")
+
     return jsonify({
         "status": "success",
         "solicitud_nro": solicitud_nro,
         "pdf_filename": pdf_filename,
+        "pdf_base64": pdf_base64,
         "email_warning": email_error_msg
     })
 
