@@ -14,6 +14,7 @@ sent_emails/
 temp_submissions/
 submissions_state.json
 *.pdf
+!alta_concesionario.pdf
 
 # Logs
 *.log

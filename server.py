@@ -21,7 +21,7 @@ app = Flask(__name__)
 BACKUP_FOLDER = "/tmp/temp_submissions"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-TEMPLATE_PDF = os.path.join(BASE_DIR, "ALTA CONCESIONARIO -.pdf")
+TEMPLATE_PDF = os.path.join(BASE_DIR, "alta_concesionario.pdf")
 
 def get_next_solicitud_nro():
     """
@@ -129,6 +129,31 @@ def submit_onboarding():
         "pdf_filename": pdf_filename,
         "email_warning": email_error_msg
     })
+
+
+@app.route('/api/debug')
+def debug_server():
+    try:
+        files = []
+        for root, dirs, filenames in os.walk(BASE_DIR):
+            if ".git" in root or "__pycache__" in root or "node_modules" in root:
+                continue
+            for f in filenames:
+                rel_path = os.path.relpath(os.path.join(root, f), BASE_DIR)
+                files.append(rel_path)
+        
+        env_keys = list(os.environ.keys())
+        
+        return jsonify({
+            "base_dir": BASE_DIR,
+            "cwd": os.getcwd(),
+            "template_pdf_exists": os.path.exists(TEMPLATE_PDF),
+            "template_pdf_path": TEMPLATE_PDF,
+            "files_in_base_dir": files,
+            "env_keys": env_keys
+        })
+    except Exception as e:
+        return jsonify({"error": str(e)})
 
 
 @app.route('/api/download/<path:filename>')
