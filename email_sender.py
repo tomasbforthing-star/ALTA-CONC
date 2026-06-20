@@ -13,7 +13,7 @@ try:
 except ImportError:
     pass
 
-def prepare_and_send_email(data, pdf_path, temp_files_folder="sent_emails"):
+def prepare_and_send_email(data, pdf_path, temp_files_folder="/tmp/sent_emails"):
     """
     Composes and dispatches the dealer onboarding email containing the PDF
     report and all original photo attachments.

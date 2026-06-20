@@ -8,53 +8,28 @@ from flask import Flask, request, jsonify, send_from_directory
 from pdf_generator import generate_final_pdf
 from email_sender import prepare_and_send_email
 
-# Configure Logger
+# Configure Logger (Vercel captures stdout, file handler removed to avoid read-only FS errors)
 logging.basicConfig(
     level=logging.INFO,
     format='%(asctime)s [%(levelname)s] %(message)s',
     handlers=[
-        logging.FileHandler("submissions.log", encoding="utf-8"),
         logging.StreamHandler()
     ]
 )
 
 app = Flask(__name__)
 
-# State file to track sequential submission numbers
-STATE_FILE = "submissions_state.json"
-BACKUP_FOLDER = "temp_submissions"
+# In Vercel, we must write to /tmp
+BACKUP_FOLDER = "/tmp/temp_submissions"
 TEMPLATE_PDF = "ALTA CONCESIONARIO -.pdf"
 
 def get_next_solicitud_nro():
     """
-    Reads the state file, increments the counter, and returns a formatted
-    solicitud number like FTH-YYYY-NNNN.
+    Returns a formatted solicitud number like FTH-YYYYMMDD-HHMMSS.
+    (Vercel is stateless, so we use a timestamp-based ID instead of a counter file).
     """
-    current_year = datetime.now().year
-    counter = 1
-    
-    # Read existing state if available
-    if os.path.exists(STATE_FILE):
-        try:
-            with open(STATE_FILE, "r") as f:
-                state = json.load(f)
-                
-            # If the year matches, increment the counter. Else, reset counter to 1 for the new year.
-            if state.get("year") == current_year:
-                counter = state.get("counter", 0) + 1
-            else:
-                counter = 1
-        except Exception as e:
-            logging.error(f"Error reading state file {STATE_FILE}: {e}")
-            
-    # Save the updated state
-    try:
-        with open(STATE_FILE, "w") as f:
-            json.dump({"year": current_year, "counter": counter}, f)
-    except Exception as e:
-        logging.error(f"Error writing state file {STATE_FILE}: {e}")
-        
-    return f"FTH-{current_year}-{counter:04d}"
+    now = datetime.now()
+    return f"FTH-{now.strftime('%Y%m%d-%H%M%S')}"
 
 
 def save_backup_payload(solicitud_nro, data):
@@ -122,7 +97,7 @@ def submit_onboarding():
     for char in ['/', '\\', '?', '%', '*', ':', '|', '"', '<', '>']:
         pdf_filename = pdf_filename.replace(char, '_')
         
-    output_pdf_path = os.path.join(os.getcwd(), pdf_filename)
+    output_pdf_path = os.path.join("/tmp", pdf_filename)
     
     if not os.path.exists(TEMPLATE_PDF):
         logging.error(f"Template PDF not found: {TEMPLATE_PDF}")
@@ -155,6 +130,11 @@ def submit_onboarding():
         "email_warning": email_error_msg
     })
 
+
+@app.route('/api/download/<path:filename>')
+def download_pdf(filename):
+    # Vercel needs to serve files from /tmp since the root is read-only
+    return send_from_directory("/tmp", filename)
 
 # Serve Static files from the current folder
 @app.route('/')

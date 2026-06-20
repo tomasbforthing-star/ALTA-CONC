@@ -584,7 +584,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 // Update the download PDF button link
                 const downloadPdfBtn = document.getElementById('btn-download-pdf');
                 if (downloadPdfBtn && resData.pdf_filename) {
-                    downloadPdfBtn.href = `/${encodeURIComponent(resData.pdf_filename)}`;
+                    downloadPdfBtn.href = `/api/download/${encodeURIComponent(resData.pdf_filename)}`;
                     downloadPdfBtn.style.display = 'inline-flex';
                 }
                 
