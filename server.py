@@ -18,10 +18,10 @@ logging.basicConfig(
 )
 
 app = Flask(__name__)
-
-# In Vercel, we must write to /tmp
 BACKUP_FOLDER = "/tmp/temp_submissions"
-TEMPLATE_PDF = "ALTA CONCESIONARIO -.pdf"
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+TEMPLATE_PDF = os.path.join(BASE_DIR, "ALTA CONCESIONARIO -.pdf")
 
 def get_next_solicitud_nro():
     """
@@ -139,11 +139,11 @@ def download_pdf(filename):
 # Serve Static files from the current folder
 @app.route('/')
 def index():
-    return send_from_directory(os.getcwd(), 'index.html')
+    return send_from_directory(BASE_DIR, 'index.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
-    return send_from_directory(os.getcwd(), filename)
+    return send_from_directory(BASE_DIR, filename)
 
 
 if __name__ == '__main__':
