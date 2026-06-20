@@ -1,9 +1,4 @@
 {
-  "functions": {
-    "api/index.py": {
-      "includeFiles": "alta_concesionario.pdf"
-    }
-  },
   "rewrites": [
     { "source": "/api/(.*)", "destination": "/api/index.py" }
   ]
