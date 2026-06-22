@@ -435,7 +435,7 @@ function resizeImage(file, maxWidth, maxHeight, quality) {
                 }
 
                 // Preview and compress image
-                resizeImage(file, 1200, 1200, 0.7)
+                resizeImage(file, 800, 800, 0.6)
                     .then(base64Str => {
                         window.categoryImages[cat].push(base64Str);
                         renderPreviews();
