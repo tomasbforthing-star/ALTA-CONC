@@ -320,10 +320,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const dropzone = card.querySelector('.dropzone');
         const fileInput = card.querySelector('.file-input-hidden');
         const previewContainer = card.querySelector('.preview-container');
+        const dropzonePrompt = card.querySelector('.dropzone-prompt');
         
         // Setup preview container for multiple images
         previewContainer.innerHTML = '';
-        previewContainer.style.display = 'flex';
+        previewContainer.style.display = 'none';
+        previewContainer.style.position = 'relative';
+        previewContainer.style.backgroundColor = 'transparent';
         previewContainer.style.flexWrap = 'wrap';
         previewContainer.style.gap = '10px';
         previewContainer.style.marginTop = '15px';
@@ -408,6 +411,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function renderPreviews() {
             previewContainer.innerHTML = '';
             if (window.categoryImages[cat].length > 0) {
+                if(dropzonePrompt) dropzonePrompt.style.display = 'none';
                 previewContainer.style.display = 'flex';
                 window.categoryImages[cat].forEach((base64Str, index) => {
                     const item = document.createElement('div');
@@ -455,6 +459,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     previewContainer.appendChild(item);
                 });
             } else {
+                if(dropzonePrompt) dropzonePrompt.style.display = 'flex';
                 previewContainer.style.display = 'none';
             }
             updateFormProgress();
