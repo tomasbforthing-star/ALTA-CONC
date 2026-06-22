@@ -183,6 +183,25 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
     // ----------------------------------------------------
+    
+    // ----------------------------------------------------
+    // Dynamic Role Logic
+    // ----------------------------------------------------
+    const selectTipoRazonSocial = document.getElementById('tipo-razon-social');
+    const inputCargoDirector = document.getElementById('cargo-director');
+    if (selectTipoRazonSocial && inputCargoDirector) {
+        selectTipoRazonSocial.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (val === 'SRL') {
+                inputCargoDirector.value = 'SOCIO GERENTE';
+            } else if (val === 'SA' || val === 'SAS') {
+                inputCargoDirector.value = 'PRESIDENTE';
+            } else {
+                inputCargoDirector.value = '';
+            }
+        });
+    }
+
     // 2. Section 2: Conditional "Otros" Checkbox
     // ----------------------------------------------------
     const chkOtros = document.getElementById('chk-otros');
@@ -554,6 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 telefono_principal: document.getElementById('telefono-principal').value,
                 email_principal: document.getElementById('email-principal').value,
                 sitio_web: document.getElementById('sitio-web').value,
+                redes_sociales: document.getElementById('redes-sociales') ? document.getElementById('redes-sociales').value : '',
                 fecha_apertura: document.getElementById('fecha-apertura').value,
                 
                 otras_marcas: document.getElementById('otras-marcas').value,
@@ -590,8 +610,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const email = row.querySelector('.col-email').value;
                 const telefono = row.querySelector('.col-telefono').value;
                 
-                // Only add if at least cargo or nombre is filled
-                if (cargo.trim() !== '' || nombre.trim() !== '') {
+                // Only add if at least nombre, email or telefono is filled
+                if (nombre.trim() !== '' || email.trim() !== '' || telefono.trim() !== '') {
                     formData.personal.push({ cargo, nombre, email, telefono });
                 }
             });

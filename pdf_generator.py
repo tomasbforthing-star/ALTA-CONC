@@ -267,8 +267,8 @@ def generate_pdf_content(data, temp_pdf_path):
         [
             Paragraph("Apertura Estimada:", field_label_style),
             Paragraph(data.get('fecha_apertura', ''), field_val_style),
-            Paragraph("", field_label_style),
-            Paragraph("", field_val_style),
+            Paragraph("Redes Sociales:", field_label_style),
+            Paragraph(data.get('redes_sociales', ''), field_val_style),
         ]
     ]
     

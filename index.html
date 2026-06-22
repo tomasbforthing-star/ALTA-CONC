@@ -176,6 +176,11 @@
                                 <label for="sitio-web">Sitio Web</label>
                                 <input type="url" id="sitio-web" name="sitio_web" placeholder="Ej. https://www.concesionario.com.ar">
                             </div>
+
+                            <div class="input-group full-width-tablet">
+                                <label for="redes-sociales">Redes Sociales</label>
+                                <input type="text" id="redes-sociales" name="redes_sociales" placeholder="Ej. Instagram: @forthing.arg">
+                            </div>
                             
                             <div class="input-group">
                                 <label for="fecha-apertura" class="required-label">Fecha de Apertura Aproximada</label>
@@ -433,215 +438,78 @@
                                     </tr>
                                 </thead>
                                 <tbody id="personal-table-body">
-                                    <!-- Dynamic rows will be preloaded via JS or hardcoded for SEO/Static structure. Let's write them statically first to ensure immediate premium rendering -->
-                                    <tr data-cargo="Presidente" class="table-row">
+                                    <!-- Dynamic Director Row -->
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Presidente" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" id="cargo-director" value="" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;" placeholder="Seleccione Tipo de Razón Social...">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
-                                    <tr data-cargo="Gerente Comercial" class="table-row">
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Gerente Comercial" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" value="Responsable de Ventas" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
-                                    <tr data-cargo="Responsable de Ventas" class="table-row">
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Responsable de Ventas" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" value="Vendedor" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
-                                    <tr data-cargo="Vendedor" class="table-row">
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Vendedor" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" value="Responsable de Administración" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
-                                    <tr data-cargo="Responsable Administrativo" class="table-row">
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Responsable Administrativo" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" value="Responsable de Repuestos" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
-                                    <tr data-cargo="Responsable de Repuestos" class="table-row">
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Responsable de Repuestos" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" value="Responsable de Postventa" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
-                                    <tr data-cargo="Responsable de Postventa" class="table-row">
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Responsable de Postventa" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" value="Mecánico" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
-                                    <tr data-cargo="Mecánico" class="table-row">
+                                    <tr class="table-row">
                                         <td>
-                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
+                                            <input type="text" class="table-input col-cargo" value="Mecánico" readonly style="background-color: #F3F4F6; cursor: not-allowed; color: #4B5563; font-weight: 500;">
                                         </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr data-cargo="Mecánico" class="table-row">
-                                        <td>
-                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr data-cargo="Mecánico" class="table-row">
-                                        <td>
-                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
-                                    </tr>
-                                    <tr data-cargo="Mecánico" class="table-row">
-                                        <td>
-                                            <input type="text" class="table-input col-cargo" value="Mecánico" placeholder="Cargo">
-                                        </td>
-                                        <td>
-                                            <input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido">
-                                        </td>
-                                        <td>
-                                            <input type="email" class="table-input col-email" placeholder="email@ejemplo.com">
-                                        </td>
-                                        <td>
-                                            <input type="tel" class="table-input col-telefono" placeholder="Teléfono">
-                                        </td>
-                                        <td class="actions-col">
-                                            <button type="button" class="btn-delete-row" title="Eliminar fila">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path><line x1="10" y1="11" x2="10" y2="17"></line><line x1="14" y1="11" x2="14" y2="17"></line></svg>
-                                            </button>
-                                        </td>
+                                        <td><input type="text" class="table-input col-nombre" placeholder="Nombre y Apellido"></td>
+                                        <td><input type="email" class="table-input col-email" placeholder="email@ejemplo.com"></td>
+                                        <td><input type="tel" class="table-input col-telefono" placeholder="Teléfono"></td>
+                                        <td class="actions-col"></td>
                                     </tr>
                                 </tbody>
                             </table>
