@@ -100,41 +100,47 @@ Este correo fue generado automáticamente por el Portal de Alta de Concesionario
     
     import base64
     photos_dict = data.get("imagenes", {})
-    for key, base64_str in photos_dict.items():
-        if base64_str:
-            try:
-                # Decode base64
-                if "," in base64_str:
-                    header, base64_data = base64_str.split(",")
-                else:
-                    base64_data = base64_str
-                    header = "image/jpeg"
-                    
-                # Determine extension
-                ext = "jpg"
-                if "png" in header:
-                    ext = "png"
-                elif "webp" in header:
-                    ext = "webp"
-                    
-                img_bytes = base64.b64decode(base64_data)
-                label = photo_labels.get(key, key)
-                filename = f"{label}.{ext}"
+    for key, base64_list in photos_dict.items():
+        if not isinstance(base64_list, list):
+            if base64_list:
+                base64_list = [base64_list]
+            else:
+                base64_list = []
                 
-                # Attachment structure
-                img_attachment = MIMEApplication(img_bytes, Name=filename)
-                img_attachment["Content-Disposition"] = f'attachment; filename="{filename}"'
-                # Attempt to guess and set Content-Type
-                mime_type, _ = mimetypes.guess_type(filename)
-                if mime_type:
-                    img_attachment["Content-Type"] = mime_type
-                else:
-                    img_attachment["Content-Type"] = f"image/{ext}"
+        for idx, base64_str in enumerate(base64_list):
+            if base64_str:
+                try:
+                    # Decode base64
+                    if "," in base64_str:
+                        header, base64_data = base64_str.split(",")
+                    else:
+                        base64_data = base64_str
+                        header = "image/jpeg"
+                        
+                    # Determine extension
+                    ext = "jpg"
+                    if "png" in header:
+                        ext = "png"
+                    elif "webp" in header:
+                        ext = "webp"
+                        
+                    img_bytes = base64.b64decode(base64_data)
+                    label = photo_labels.get(key, key)
+                    filename = f"{label}_{idx+1}.{ext}"
                     
-                msg.attach(img_attachment)
-            except Exception as e:
-                print(f"Failed to attach image {key}: {e}")
-                # We do not crash the whole submission if one image attach fails, but log it.
+                    # Attachment structure
+                    img_attachment = MIMEApplication(img_bytes, Name=filename)
+                    img_attachment["Content-Disposition"] = f'attachment; filename="{filename}"'
+                    # Attempt to guess and set Content-Type
+                    mime_type, _ = mimetypes.guess_type(filename)
+                    if mime_type:
+                        img_attachment["Content-Type"] = mime_type
+                    else:
+                        img_attachment["Content-Type"] = f"image/{ext}"
+                        
+                    msg.attach(img_attachment)
+                except Exception as e:
+                    print(f"Failed to attach image {key}_{idx+1}: {e}")
 
     # 5. Local Backup/Audit (Save as .eml file)
     try:

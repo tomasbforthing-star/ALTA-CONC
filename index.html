@@ -106,6 +106,17 @@
                             </div>
                             
                             <div class="input-group">
+                                <label for="tipo-razon-social" class="required-label">Tipo de Razón Social</label>
+                                <select id="tipo-razon-social" name="tipo_razon_social" required>
+                                    <option value="" disabled selected>Seleccione tipo...</option>
+                                    <option value="SRL">SRL (Sociedad de Responsabilidad Limitada)</option>
+                                    <option value="SA">SA (Sociedad Anónima)</option>
+                                    <option value="SAS">SAS (Sociedad por Acciones Simplificada)</option>
+                                    <option value="Otra">Otra</option>
+                                </select>
+                            </div>
+                            
+                            <div class="input-group">
                                 <label for="cuit" class="required-label">CUIT</label>
                                 <input type="text" id="cuit" name="cuit" required placeholder="30-12345678-9" pattern="\d{2}-\d{8}-\d{1}">
                             </div>
@@ -164,6 +175,11 @@
                             <div class="input-group full-width-tablet">
                                 <label for="sitio-web">Sitio Web</label>
                                 <input type="url" id="sitio-web" name="sitio_web" placeholder="Ej. https://www.concesionario.com.ar">
+                            </div>
+                            
+                            <div class="input-group">
+                                <label for="fecha-apertura" class="required-label">Fecha de Apertura Aproximada</label>
+                                <input type="date" id="fecha-apertura" name="fecha_apertura" required>
                             </div>
                         </div>
                     </section>
@@ -312,9 +328,9 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 12H5M12 19V5"/></svg>
                                 </div>
                                 <div class="sup-card-content">
-                                    <label for="sup-salon">Salón de Ventas</label>
+                                    <label for="sup-salon" class="required-label">Salón de Ventas</label>
                                     <div class="unit-input-wrapper">
-                                        <input type="number" id="sup-salon" class="sup-input" name="sup_salon" min="0" placeholder="0">
+                                        <input type="number" id="sup-salon" class="sup-input" name="sup_salon" min="0" placeholder="0" required>
                                         <span class="unit-tag">m²</span>
                                     </div>
                                 </div>
@@ -326,9 +342,9 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l3.77-3.77a6 6 0 0 1-7.94 7.94l-6.91 6.91a2.12 2.12 0 0 1-3-3l6.91-6.91a6 6 0 0 1 7.94-7.94l-3.76 3.76z"/></svg>
                                 </div>
                                 <div class="sup-card-content">
-                                    <label for="sup-taller">Taller Mecánico</label>
+                                    <label for="sup-taller" class="required-label">Taller Mecánico</label>
                                     <div class="unit-input-wrapper">
-                                        <input type="number" id="sup-taller" class="sup-input" name="sup_taller" min="0" placeholder="0">
+                                        <input type="number" id="sup-taller" class="sup-input" name="sup_taller" min="0" placeholder="0" required>
                                         <span class="unit-tag">m²</span>
                                     </div>
                                 </div>
@@ -340,9 +356,9 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
                                 </div>
                                 <div class="sup-card-content">
-                                    <label for="sup-deposito">Depósito de Repuestos</label>
+                                    <label for="sup-deposito" class="required-label">Depósito de Repuestos</label>
                                     <div class="unit-input-wrapper">
-                                        <input type="number" id="sup-deposito" class="sup-input" name="sup_deposito" min="0" placeholder="0">
+                                        <input type="number" id="sup-deposito" class="sup-input" name="sup_deposito" min="0" placeholder="0" required>
                                         <span class="unit-tag">m²</span>
                                     </div>
                                 </div>
@@ -354,9 +370,9 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"></path><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path></svg>
                                 </div>
                                 <div class="sup-card-content">
-                                    <label for="sup-admin">Área Administrativa</label>
+                                    <label for="sup-admin" class="required-label">Área Administrativa</label>
                                     <div class="unit-input-wrapper">
-                                        <input type="number" id="sup-admin" class="sup-input" name="sup_admin" min="0" placeholder="0">
+                                        <input type="number" id="sup-admin" class="sup-input" name="sup_admin" min="0" placeholder="0" required>
                                         <span class="unit-tag">m²</span>
                                     </div>
                                 </div>
@@ -368,9 +384,9 @@
                                     <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
                                 </div>
                                 <div class="sup-card-content">
-                                    <label for="sup-postventa">Área de Postventa</label>
+                                    <label for="sup-postventa" class="required-label">Área de Postventa</label>
                                     <div class="unit-input-wrapper">
-                                        <input type="number" id="sup-postventa" class="sup-input" name="sup_postventa" min="0" placeholder="0">
+                                        <input type="number" id="sup-postventa" class="sup-input" name="sup_postventa" min="0" placeholder="0" required>
                                         <span class="unit-tag">m²</span>
                                     </div>
                                 </div>
@@ -646,8 +662,8 @@
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
                             </div>
                             <div>
-                                <h2 class="section-title">REGISTRO FOTOGRÁFICO DE INSTALACIONES (OPCIONAL)</h2>
-                                <p class="section-desc">Documente visualmente las áreas clave del concesionario. Formato JPG, PNG, WEBP. Max. 10 MB. Si no se adjuntan fotos, la solicitud se podrá enviar igual.</p>
+                                <h2 class="section-title">REGISTRO FOTOGRÁFICO DE INSTALACIONES</h2>
+                                <p class="section-desc">Documente visualmente las áreas clave del concesionario. Formato JPG, PNG, WEBP. Max. 10 MB por foto. <span style="color: #dc2626; font-weight: 500;">Todas las categorías son obligatorias (*). Puede adjuntar múltiples fotos por sección.</span></p>
                             </div>
                         </div>
                         
@@ -656,10 +672,10 @@
                             <!-- Card: Frente del Concesionario -->
                             <div class="uploader-card" data-category="frente">
                                 <div class="uploader-card-header">
-                                    <span class="uploader-card-title">Frente del Concesionario</span>
+                                    <span class="uploader-card-title required-label">Frente del Concesionario</span>
                                 </div>
                                 <div class="dropzone" id="dropzone-frente">
-                                    <input type="file" id="file-frente" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <input type="file" id="file-frente" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden" multiple required>
                                     <div class="dropzone-prompt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                         <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
@@ -684,10 +700,10 @@
                             <!-- Card: Salón de Ventas -->
                             <div class="uploader-card" data-category="salon">
                                 <div class="uploader-card-header">
-                                    <span class="uploader-card-title">Salón de Ventas</span>
+                                    <span class="uploader-card-title required-label">Salón de Ventas</span>
                                 </div>
                                 <div class="dropzone" id="dropzone-salon">
-                                    <input type="file" id="file-salon" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <input type="file" id="file-salon" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden" multiple required>
                                     <div class="dropzone-prompt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                         <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
@@ -712,10 +728,10 @@
                             <!-- Card: Taller Mecánico -->
                             <div class="uploader-card" data-category="taller">
                                 <div class="uploader-card-header">
-                                    <span class="uploader-card-title">Taller Mecánico</span>
+                                    <span class="uploader-card-title required-label">Taller Mecánico</span>
                                 </div>
                                 <div class="dropzone" id="dropzone-taller">
-                                    <input type="file" id="file-taller" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <input type="file" id="file-taller" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden" multiple required>
                                     <div class="dropzone-prompt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                         <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
@@ -740,10 +756,10 @@
                             <!-- Card: Depósito de Repuestos -->
                             <div class="uploader-card" data-category="deposito">
                                 <div class="uploader-card-header">
-                                    <span class="uploader-card-title">Depósito de Repuestos</span>
+                                    <span class="uploader-card-title required-label">Depósito de Repuestos</span>
                                 </div>
                                 <div class="dropzone" id="dropzone-deposito">
-                                    <input type="file" id="file-deposito" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <input type="file" id="file-deposito" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden" multiple required>
                                     <div class="dropzone-prompt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                         <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
@@ -768,10 +784,10 @@
                             <!-- Card: Área de Postventa -->
                             <div class="uploader-card" data-category="postventa">
                                 <div class="uploader-card-header">
-                                    <span class="uploader-card-title">Área de Postventa</span>
+                                    <span class="uploader-card-title required-label">Área de Postventa</span>
                                 </div>
                                 <div class="dropzone" id="dropzone-postventa">
-                                    <input type="file" id="file-postventa" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <input type="file" id="file-postventa" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden" multiple required>
                                     <div class="dropzone-prompt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                         <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>
@@ -796,10 +812,10 @@
                             <!-- Card: Área Administrativa -->
                             <div class="uploader-card" data-category="administrativa">
                                 <div class="uploader-card-header">
-                                    <span class="uploader-card-title">Área Administrativa</span>
+                                    <span class="uploader-card-title required-label">Área Administrativa</span>
                                 </div>
                                 <div class="dropzone" id="dropzone-administrativa">
-                                    <input type="file" id="file-administrativa" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden">
+                                    <input type="file" id="file-administrativa" accept=".jpg,.jpeg,.png,.webp" class="file-input-hidden" multiple required>
                                     <div class="dropzone-prompt">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" class="upload-icon"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M17 8l-5-5-5 5M12 3v12"/></svg>
                                         <p class="dropzone-text">Arrastre y suelte la imagen aquí o <span>seleccione un archivo</span></p>

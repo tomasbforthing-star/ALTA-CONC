@@ -76,14 +76,15 @@ def submit_onboarding():
         
     # 1. Validate General Required Fields
     required_fields = [
-        'nombre_concesionario', 'razon_social', 'cuit',
+        'nombre_concesionario', 'razon_social', 'tipo_razon_social', 'cuit',
         'direccion_legal', 'ciudad', 'provincia',
-        'telefono_principal', 'email_principal'
+        'telefono_principal', 'email_principal', 'fecha_apertura',
+        'sup_salon', 'sup_taller', 'sup_deposito', 'sup_admin', 'sup_postventa'
     ]
     
     missing_fields = []
     for field in required_fields:
-        if not data.get(field) or str(data.get(field)).strip() == "":
+        if str(data.get(field, "")).strip() == "":
             missing_fields.append(field)
             
     if missing_fields:
@@ -93,8 +94,16 @@ def submit_onboarding():
             "details": f"Faltan completar los siguientes campos obligatorios: {', '.join(missing_fields)}"
         }), 400
         
-    # 2. Validate Photo Uploads (Skipped - Image uploads are now optional)
-    pass
+    # 2. Validate Photo Uploads
+    photos = data.get('imagenes', {})
+    photo_categories = ['frente', 'salon', 'taller', 'deposito', 'postventa', 'administrativa']
+    for cat in photo_categories:
+        cat_photos = photos.get(cat, [])
+        if not cat_photos or len(cat_photos) == 0:
+            return jsonify({
+                "error": "Fotos incompletas.",
+                "details": f"Falta adjuntar al menos una foto en la categoría: {cat}"
+            }), 400
 
     # 3. Generate Request Number
     solicitud_nro = get_next_solicitud_nro()

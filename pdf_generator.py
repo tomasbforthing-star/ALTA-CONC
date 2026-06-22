@@ -241,26 +241,32 @@ def generate_pdf_content(data, temp_pdf_path):
             Paragraph(data.get('razon_social', ''), field_val_style),
         ],
         [
+            Paragraph("Tipo Razón Social:", field_label_style),
+            Paragraph(data.get('tipo_razon_social', ''), field_val_style),
             Paragraph("CUIT:", field_label_style),
             Paragraph(data.get('cuit', ''), field_val_style),
+        ],
+        [
             Paragraph("Dirección Legal:", field_label_style),
             Paragraph(data.get('direccion_legal', ''), field_val_style),
-        ],
-        [
             Paragraph("Ciudad:", field_label_style),
             Paragraph(data.get('ciudad', ''), field_val_style),
+        ],
+        [
             Paragraph("Provincia:", field_label_style),
             Paragraph(data.get('provincia', ''), field_val_style),
-        ],
-        [
             Paragraph("Teléfono Principal:", field_label_style),
             Paragraph(data.get('telefono_principal', ''), field_val_style),
-            Paragraph("Email Principal:", field_label_style),
-            Paragraph(data.get('email_principal', ''), field_val_style),
         ],
         [
+            Paragraph("Correo Principal:", field_label_style),
+            Paragraph(data.get('email_principal', ''), field_val_style),
             Paragraph("Sitio Web:", field_label_style),
-            Paragraph(data.get('sitio_web', '-'), field_val_style),
+            Paragraph(data.get('sitio_web', ''), field_val_style),
+        ],
+        [
+            Paragraph("Apertura Estimada:", field_label_style),
+            Paragraph(data.get('fecha_apertura', ''), field_val_style),
             Paragraph("", field_label_style),
             Paragraph("", field_val_style),
         ]
@@ -426,35 +432,46 @@ def generate_pdf_content(data, temp_pdf_path):
         
         temp_files_to_clean = []
         
-        for key, base64_str in photos_dict.items():
-            if base64_str:
-                label = photo_labels.get(key, key.capitalize())
-                
-                try:
-                    img_bytes = decode_base64_image(base64_str)
-                    temp_img_path = create_temp_image_file(img_bytes)
+        for key, base64_list in photos_dict.items():
+            if not isinstance(base64_list, list):
+                if base64_list:
+                    base64_list = [base64_list]
+                else:
+                    base64_list = []
                     
-                    if temp_img_path:
-                        temp_files_to_clean.append(temp_img_path)
+            if base64_list:
+                label = photo_labels.get(key, key.capitalize())
+                story.append(Paragraph(f"<b>Categoría: {label}</b>", section_title_style))
+                story.append(Spacer(1, 4))
+                
+                for idx, base64_str in enumerate(base64_list):
+                    if not base64_str:
+                        continue
                         
-                        # Read dimensions of temp image using PIL to align correctly
-                        with PILImage.open(temp_img_path) as pimg:
-                            w, h = pimg.size
+                    try:
+                        img_bytes = decode_base64_image(base64_str)
+                        temp_img_path = create_temp_image_file(img_bytes)
+                        
+                        if temp_img_path:
+                            temp_files_to_clean.append(temp_img_path)
                             
-                        # Wrap label and image in KeepTogether
+                            with PILImage.open(temp_img_path) as pimg:
+                                w, h = pimg.size
+                                
+                            story.append(KeepTogether([
+                                Paragraph(f"Foto {idx+1}", field_label_style),
+                                Spacer(1, 2),
+                                Image(temp_img_path, width=w, height=h),
+                                Spacer(1, 10)
+                            ]))
+                    except Exception as ex:
                         story.append(KeepTogether([
-                            Paragraph(f"<b>Categoría: {label}</b>", section_title_style),
-                            Spacer(1, 4),
-                            Image(temp_img_path, width=w, height=h),
-                            Spacer(1, 15)
+                            Paragraph(f"Foto {idx+1}", field_label_style),
+                            Spacer(1, 2),
+                            Paragraph(f"<font color='red'>Error cargando imagen: {ex}</font>", field_val_style),
+                            Spacer(1, 10)
                         ]))
-                except Exception as ex:
-                    story.append(KeepTogether([
-                        Paragraph(f"<b>Categoría: {label}</b>", section_title_style),
-                        Spacer(1, 4),
-                        Paragraph(f"<font color='red'>Error cargando imagen: {ex}</font>", field_val_style),
-                        Spacer(1, 10)
-                    ]))
+                story.append(Spacer(1, 5))
 
     # Build the document
     doc.build(story, canvasmaker=NumberedCanvas)

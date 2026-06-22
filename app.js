@@ -294,38 +294,28 @@ document.addEventListener('DOMContentLoaded', () => {
     // 5. Section 6: Photo Uploader Cards (Drag & Drop)
     // ----------------------------------------------------
     const uploaderCards = document.querySelectorAll('.uploader-card');
+    window.categoryImages = { frente: [], salon: [], taller: [], deposito: [], postventa: [], administrativa: [] };
 
     uploaderCards.forEach(card => {
+        const cat = card.getAttribute('data-category');
         const dropzone = card.querySelector('.dropzone');
         const fileInput = card.querySelector('.file-input-hidden');
         const previewContainer = card.querySelector('.preview-container');
-        const previewImg = card.querySelector('.preview-img');
-        const btnDelete = card.querySelector('.btn-delete-img');
-        const btnReplace = card.querySelector('.btn-replace-img');
+        
+        // Setup preview container for multiple images
+        previewContainer.innerHTML = '';
+        previewContainer.style.display = 'flex';
+        previewContainer.style.flexWrap = 'wrap';
+        previewContainer.style.gap = '10px';
+        previewContainer.style.marginTop = '15px';
         
         // Trigger file picker on dropzone click (excluding actions overlay clicking)
         dropzone.addEventListener('click', (e) => {
-            if (e.target.closest('.preview-actions') || e.target.closest('.btn-action-preview')) {
+            if (e.target.closest('.preview-actions') || e.target.closest('.btn-action-preview') || e.target.closest('.multi-preview-item')) {
                 return; // Let actions work normally
             }
             fileInput.click();
         });
-
-        // Replace image handler
-        if (btnReplace) {
-            btnReplace.addEventListener('click', (e) => {
-                e.stopPropagation();
-                fileInput.click();
-            });
-        }
-
-        // Delete image handler
-        if (btnDelete) {
-            btnDelete.addEventListener('click', (e) => {
-                e.stopPropagation();
-                resetImageUploader();
-            });
-        }
 
         // Drag & Drop event listeners
         ['dragenter', 'dragover'].forEach(eventName => {
@@ -347,48 +337,103 @@ document.addEventListener('DOMContentLoaded', () => {
         // File drop handler
         dropzone.addEventListener('drop', (e) => {
             const dt = e.dataTransfer;
-            const files = dt.files;
-            if (files.length > 0) {
-                handleUploadedFile(files[0]);
+            if (dt.files.length > 0) {
+                handleUploadedFiles(dt.files);
             }
         });
 
         // File pick handler
         fileInput.addEventListener('change', () => {
             if (fileInput.files.length > 0) {
-                handleUploadedFile(fileInput.files[0]);
+                handleUploadedFiles(fileInput.files);
             }
+            fileInput.value = ''; // clear to allow same file re-selection if needed
         });
 
-        function handleUploadedFile(file) {
-            // File validation: Type
-            const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
-            if (!allowedTypes.includes(file.type)) {
-                alert('Formato de archivo no válido. Utilice JPG, PNG o WEBP.');
-                return;
-            }
+        function handleUploadedFiles(files) {
+            for(let i=0; i<files.length; i++) {
+                const file = files[i];
+                if (window.categoryImages[cat].length >= 5) {
+                    alert('Límite de 5 fotos por categoría alcanzado.');
+                    break;
+                }
+                
+                // File validation: Type
+                const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+                if (!allowedTypes.includes(file.type)) {
+                    alert('Formato de archivo no válido. Utilice JPG, PNG o WEBP.');
+                    continue;
+                }
 
-            // File validation: Size (10 MB = 10 * 1024 * 1024 bytes)
-            const maxSize = 10 * 1024 * 1024;
-            if (file.size > maxSize) {
-                alert('El archivo supera el tamaño máximo de 10 MB.');
-                return;
-            }
+                // File validation: Size (10 MB = 10 * 1024 * 1024 bytes)
+                const maxSize = 10 * 1024 * 1024;
+                if (file.size > maxSize) {
+                    alert('El archivo supera el tamaño máximo de 10 MB.');
+                    continue;
+                }
 
-            // Preview image using FileReader
-            const reader = new FileReader();
-            reader.readAsDataURL(file);
-            reader.onloadend = () => {
-                previewImg.src = reader.result;
-                previewContainer.style.display = 'block';
-                updateFormProgress();
-            };
+                // Preview image using FileReader
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+                reader.onloadend = () => {
+                    window.categoryImages[cat].push(reader.result);
+                    renderPreviews();
+                };
+            }
         }
 
-        function resetImageUploader() {
-            fileInput.value = ''; // Clear file input value
-            previewImg.src = '';
-            previewContainer.style.display = 'none';
+        function renderPreviews() {
+            previewContainer.innerHTML = '';
+            if (window.categoryImages[cat].length > 0) {
+                previewContainer.style.display = 'flex';
+                window.categoryImages[cat].forEach((base64Str, index) => {
+                    const item = document.createElement('div');
+                    item.className = 'multi-preview-item';
+                    item.style.position = 'relative';
+                    item.style.width = '100px';
+                    item.style.height = '100px';
+                    item.style.borderRadius = '8px';
+                    item.style.overflow = 'hidden';
+                    item.style.border = '1px solid #E5E7EB';
+                    
+                    const img = document.createElement('img');
+                    img.src = base64Str;
+                    img.style.width = '100%';
+                    img.style.height = '100%';
+                    img.style.objectFit = 'cover';
+                    
+                    const btnDel = document.createElement('button');
+                    btnDel.type = 'button';
+                    btnDel.innerHTML = '×';
+                    btnDel.title = 'Eliminar foto';
+                    btnDel.style.position = 'absolute';
+                    btnDel.style.top = '4px';
+                    btnDel.style.right = '4px';
+                    btnDel.style.background = 'rgba(220, 38, 38, 0.9)';
+                    btnDel.style.color = 'white';
+                    btnDel.style.border = 'none';
+                    btnDel.style.borderRadius = '50%';
+                    btnDel.style.width = '24px';
+                    btnDel.style.height = '24px';
+                    btnDel.style.cursor = 'pointer';
+                    btnDel.style.fontWeight = 'bold';
+                    btnDel.style.display = 'flex';
+                    btnDel.style.alignItems = 'center';
+                    btnDel.style.justifyContent = 'center';
+                    
+                    btnDel.onclick = (e) => {
+                        e.stopPropagation();
+                        window.categoryImages[cat].splice(index, 1);
+                        renderPreviews();
+                    };
+                    
+                    item.appendChild(img);
+                    item.appendChild(btnDel);
+                    previewContainer.appendChild(item);
+                });
+            } else {
+                previewContainer.style.display = 'none';
+            }
             updateFormProgress();
         }
     });
@@ -425,7 +470,9 @@ document.addEventListener('DOMContentLoaded', () => {
         // Perform custom validation checks on all required inputs
         const requiredFields = form.querySelectorAll('[required]');
         requiredFields.forEach(field => {
-            const inputGroup = field.closest('.input-group');
+            if (field.type === 'file') return; // Image validation handled separately below
+
+            const inputGroup = field.closest('.input-group') || field.closest('.superficie-card');
             
             // Remove previous error states
             if (inputGroup) {
@@ -452,6 +499,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
             }
         });
+        
+        // Validate Image uploads
+        const photoCategories = ['frente', 'salon', 'taller', 'deposito', 'postventa', 'administrativa'];
+        for(let cat of photoCategories) {
+            const dropzone = document.getElementById(`dropzone-${cat}`);
+            if(!window.categoryImages[cat] || window.categoryImages[cat].length === 0) {
+                isFormValid = false;
+                if (dropzone) {
+                    dropzone.style.borderColor = '#DC2626';
+                    dropzone.style.backgroundColor = '#FEF2F2';
+                    if (!firstInvalidField) firstInvalidField = dropzone;
+                }
+            } else {
+                if (dropzone) {
+                    dropzone.style.borderColor = '#D1D5DB';
+                    dropzone.style.backgroundColor = '#F9FAFB';
+                }
+            }
+        }
 
         // Validate CUIT pattern specifically
         if (cuitField && cuitField.value) {
@@ -480,6 +546,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const formData = {
                 nombre_concesionario: document.getElementById('nombre-concesionario').value,
                 razon_social: document.getElementById('razon-social').value,
+                tipo_razon_social: document.getElementById('tipo-razon-social').value,
                 cuit: document.getElementById('cuit').value,
                 direccion_legal: document.getElementById('direccion-legal').value,
                 ciudad: document.getElementById('ciudad').value,
@@ -487,6 +554,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 telefono_principal: document.getElementById('telefono-principal').value,
                 email_principal: document.getElementById('email-principal').value,
                 sitio_web: document.getElementById('sitio-web').value,
+                fecha_apertura: document.getElementById('fecha-apertura').value,
                 
                 otras_marcas: document.getElementById('otras-marcas').value,
                 tipo_vehiculo: Array.from(form.querySelectorAll('input[name="tipo_vehiculo"]:checked')).map(cb => cb.value),
@@ -511,7 +579,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 personal: [],
                 
                 // Read image base64 strings
-                imagenes: {}
+                imagenes: window.categoryImages
             };
             
             // Read personal table rows
@@ -527,19 +595,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     formData.personal.push({ cargo, nombre, email, telefono });
                 }
             });
-            
-            // Read image base64s from preview elements
-            uploaderCards.forEach(card => {
-                const cat = card.getAttribute('data-category');
-                const img = card.querySelector('.preview-img');
-                if (img && img.src && img.src.startsWith('data:image')) {
-                    formData.imagenes[cat] = img.src;
-                } else {
-                    formData.imagenes[cat] = '';
-                }
-            });
-            
-            // Photos are optional, so we proceed directly without validation.
 
             // Show loading state on submit button
             const submitBtn = document.getElementById('btn-submit-form');
