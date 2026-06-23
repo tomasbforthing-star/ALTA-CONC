@@ -38,9 +38,13 @@ def prepare_and_send_email(data, pdf_path, temp_files_folder="/tmp/sent_emails")
         recipients = [r.strip() for r in recipients_env.split(",") if r.strip()]
     else:
         recipients = [
-            "tomas-barcia@forthing.com.ar"
+            "Administracion@forthing.com.ar",
+            "Venta@forthing.com.ar",
+            "Postventa@forthing.com.ar",
+            "Comunicaciones@forthing.com.ar",
+            "Marketing@forthing.com.ar",
+            "Matias.blanco@forthing.com.ar"
         ]
-    
     # 2. Compose Email Content
     concesionario_name = data.get("nombre_concesionario", "Sin Nombre")
     solicitud_nro = data.get("solicitud_nro", "FTH-2026-XXXX")
