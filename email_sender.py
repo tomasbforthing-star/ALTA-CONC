@@ -32,19 +32,15 @@ def prepare_and_send_email(data, pdf_path, temp_files_folder="/tmp/sent_emails")
     use_tls = os.environ.get("SMTP_USE_TLS", "False").lower() in ("true", "1", "yes")
     use_ssl = os.environ.get("SMTP_USE_SSL", "False").lower() in ("true", "1", "yes")
 
-    # Destination addresses
-    recipients_env = os.environ.get("SMTP_RECIPIENTS", "")
-    if recipients_env:
-        recipients = [r.strip() for r in recipients_env.split(",") if r.strip()]
-    else:
-        recipients = [
-            "Administracion@forthing.com.ar",
-            "Venta@forthing.com.ar",
-            "Postventa@forthing.com.ar",
-            "Comunicaciones@forthing.com.ar",
-            "Marketing@forthing.com.ar",
-            "Matias.blanco@forthing.com.ar"
-        ]
+    # Destination addresses (Hardcoded as requested)
+    recipients = [
+        "Administracion@forthing.com.ar",
+        "Venta@forthing.com.ar",
+        "Postventa@forthing.com.ar",
+        "Comunicaciones@forthing.com.ar",
+        "Marketing@forthing.com.ar",
+        "Matias.blanco@forthing.com.ar"
+    ]
     # 2. Compose Email Content
     concesionario_name = data.get("nombre_concesionario", "Sin Nombre")
     solicitud_nro = data.get("solicitud_nro", "FTH-2026-XXXX")
