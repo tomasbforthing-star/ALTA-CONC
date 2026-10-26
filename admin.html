@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Panel de Administración – Forthing Argentina</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+    
+    <style>
+        .admin-body {
+            background-color: var(--bg-alt);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            font-family: var(--font-body);
+        }
+        
+        .admin-login-wrapper {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 80vh;
+            padding: 20px;
+        }
+        
+        .admin-login-card {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-premium);
+            width: 100%;
+            max-width: 420px;
+            padding: 36px 30px;
+            text-align: center;
+        }
+        
+        .admin-login-card img {
+            height: 48px;
+            margin-bottom: 24px;
+        }
+        
+        .admin-login-card h2 {
+            font-family: var(--font-headings);
+            font-size: 1.4rem;
+            color: var(--brand-dark);
+            margin-bottom: 8px;
+        }
+        
+        .admin-login-card p {
+            font-size: 0.9rem;
+            color: var(--text-medium);
+            margin-bottom: 24px;
+        }
+        
+        .admin-dashboard {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 30px 24px 60px;
+            width: 100%;
+        }
+        
+        .admin-topbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 28px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .admin-topbar h1 {
+            font-family: var(--font-headings);
+            font-size: 1.8rem;
+            color: var(--brand-dark);
+        }
+        
+        .admin-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+        }
+        
+        .btn-sheet {
+            background-color: #0F9D58;
+            color: #fff;
+            border: none;
+            padding: 10px 18px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .btn-sheet:hover {
+            background-color: #0b8043;
+        }
+        
+        .btn-logout {
+            background: #fff;
+            border: 1px solid var(--border-medium);
+            color: var(--text-medium);
+            padding: 10px 18px;
+            border-radius: var(--border-radius-sm);
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: var(--transition-fast);
+        }
+        .btn-logout:hover {
+            background: #f3f4f6;
+            color: var(--error);
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+        
+        .stat-card {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-md);
+            padding: 20px;
+            box-shadow: var(--shadow-sm);
+        }
+        .stat-card span {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .stat-card h3 {
+            font-size: 2rem;
+            font-family: var(--font-headings);
+            color: var(--brand-dark);
+            margin-top: 6px;
+        }
+        
+        .table-card {
+            background: #fff;
+            border: 1px solid var(--border-light);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+        }
+        
+        .table-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--border-light);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+        
+        .search-input {
+            padding: 10px 14px;
+            border: 1px solid var(--border-medium);
+            border-radius: var(--border-radius-sm);
+            font-size: 0.9rem;
+            width: 320px;
+            max-width: 100%;
+        }
+        .search-input:focus {
+            outline: none;
+            border-color: var(--brand-accent);
+        }
+        
+        .table-responsive {
+            width: 100%;
+            overflow-x: auto;
+        }
+        
+        table.admin-table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 0.88rem;
+        }
+        
+        table.admin-table th {
+            background-color: #fafbfc;
+            color: var(--text-medium);
+            font-weight: 600;
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-light);
+            white-space: nowrap;
+        }
+        
+        table.admin-table td {
+            padding: 14px 16px;
+            border-bottom: 1px solid var(--border-light);
+            color: var(--text-main);
+            vertical-align: middle;
+        }
+        
+        table.admin-table tr:hover {
+            background-color: #f9fafb;
+        }
+        
+        .badge-tipo {
+            display: inline-block;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            background: #eff6ff;
+            color: #1d4ed8;
+            border: 1px solid #bfdbfe;
+        }
+        
+        .badge-solicitud {
+            font-family: monospace;
+            font-weight: 700;
+            color: var(--brand-accent);
+        }
+    </style>
+</head>
+<body class="admin-body">
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="header-container" style="justify-content: space-between;">
+            <div class="logo-wrapper">
+                <img src="logo_tema_oscuro.png" alt="Forthing Argentina Logo" class="brand-logo">
+            </div>
+            <div style="color: var(--brand-accent); font-weight: 700; font-size: 0.9rem; letter-spacing: 1px;">
+                PORTAL ADMINISTRADOR
+            </div>
+        </div>
+    </header>
+
+    <!-- Login View -->
+    <div id="view-login" class="admin-login-wrapper">
+        <div class="admin-login-card">
+            <h2>Acceso Administrativo</h2>
+            <p>Ingrese la contraseña de seguridad para acceder al registro de concesionarios.</p>
+            <form id="form-login" onsubmit="handleLogin(event)">
+                <div class="input-group" style="margin-bottom: 20px; text-align: left;">
+                    <label for="admin-pass" class="input-label">Contraseña de Administrador</label>
+                    <input type="password" id="admin-pass" class="form-control" placeholder="••••••••" required autofocus>
+                </div>
+                <div id="login-error" style="display: none; color: var(--error); font-size: 0.85rem; margin-bottom: 16px;">
+                    Contraseña incorrecta. Intente nuevamente.
+                </div>
+                <button type="submit" class="btn-submit" style="width: 100%; justify-content: center;">
+                    INGRESAR AL PANEL
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Dashboard View -->
+    <div id="view-dashboard" class="admin-dashboard" style="display: none;">
+        <div class="admin-topbar">
+            <div>
+                <h1>Registro de Altas de Concesionarios</h1>
+                <p style="color: var(--text-medium); font-size: 0.95rem; margin-top: 4px;">
+                    Monitoreo en tiempo real sincronizado con Google Sheets.
+                </p>
+            </div>
+            <div class="admin-actions">
+                <button class="btn-sheet" onclick="refreshData()">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+                    Actualizar
+                </button>
+                <button class="btn-logout" onclick="handleLogout()">Cerrar Sesión</button>
+            </div>
+        </div>
+
+        <!-- Metric Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <span>Total de Solicitudes</span>
+                <h3 id="stat-total">0</h3>
+            </div>
+            <div class="stat-card">
+                <span>Última Solicitud</span>
+                <h3 id="stat-last" style="font-size: 1.2rem; font-weight: 600; margin-top: 12px;">-</h3>
+            </div>
+            <div class="stat-card">
+                <span>Superficie Total Registrada</span>
+                <h3 id="stat-sup">0 m²</h3>
+            </div>
+        </div>
+
+        <!-- Table Card -->
+        <div class="table-card">
+            <div class="table-header">
+                <h2 style="font-family: var(--font-headings); font-size: 1.2rem; color: var(--brand-dark);">Historial de Concesionarios</h2>
+                <input type="text" id="search-box" class="search-input" placeholder="Buscar por concesionario, CUIT, ciudad..." oninput="filterTable()">
+            </div>
+            <div class="table-responsive">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Fecha</th>
+                            <th>N° Solicitud</th>
+                            <th>Concesionario</th>
+                            <th>Razón Social</th>
+                            <th>Tipo</th>
+                            <th>CUIT</th>
+                            <th>Ubicación</th>
+                            <th>Contacto</th>
+                            <th>Apertura Est.</th>
+                            <th>Sup. Total</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table-body">
+                        <tr>
+                            <td colspan="10" style="text-align: center; padding: 40px; color: var(--text-muted);">
+                                Cargando información...
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const AUTH_KEY = 'forthing_admin_authenticated';
+        let submissionsData = [];
+
+        function init() {
+            if (sessionStorage.getItem(AUTH_KEY) === 'true') {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const pass = document.getElementById('admin-pass').value;
+            // Password verification
+            if (pass === 'Piano/2026' || pass === 'ForthingAdmin2026') {
+                sessionStorage.setItem(AUTH_KEY, 'true');
+                showDashboard();
+            } else {
+                document.getElementById('login-error').style.display = 'block';
+            }
+        }
+
+        function handleLogout() {
+            sessionStorage.removeItem(AUTH_KEY);
+            showLogin();
+        }
+
+        function showLogin() {
+            document.getElementById('view-login').style.display = 'flex';
+            document.getElementById('view-dashboard').style.display = 'none';
+        }
+
+        function showDashboard() {
+            document.getElementById('view-login').style.display = 'none';
+            document.getElementById('view-dashboard').style.display = 'block';
+            loadSubmissions();
+        }
+
+        async function loadSubmissions() {
+            const tbody = document.getElementById('table-body');
+            tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 40px; color: var(--text-muted);">Cargando información desde la base de datos...</td></tr>';
+            
+            try {
+                const res = await fetch('/api/admin/submissions');
+                if (!res.ok) throw new Error('Error al conectar');
+                const data = await res.json();
+                submissionsData = data.submissions || [];
+                renderTable(submissionsData);
+                updateStats(submissionsData);
+            } catch (err) {
+                console.error(err);
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 40px; color: var(--error);">No se pudo cargar la información. Haga clic en Actualizar o verifique la conexión con Google Sheets.</td></tr>';
+            }
+        }
+
+        function refreshData() {
+            loadSubmissions();
+        }
+
+        function renderTable(list) {
+            const tbody = document.getElementById('table-body');
+            if (list.length === 0) {
+                tbody.innerHTML = '<tr><td colspan="10" style="text-align: center; padding: 40px; color: var(--text-muted);">No se encontraron solicitudes registradas.</td></tr>';
+                return;
+            }
+
+            tbody.innerHTML = list.map(item => `
+                <tr>
+                    <td style="white-space: nowrap; color: var(--text-medium); font-size: 0.82rem;">${escapeHtml(item.fecha || '-')}</td>
+                    <td><span class="badge-solicitud">${escapeHtml(item.solicitud_nro || '-')}</span></td>
+                    <td style="font-weight: 600; color: var(--brand-dark);">${escapeHtml(item.nombre_concesionario || '-')}</td>
+                    <td>${escapeHtml(item.razon_social || '-')}</td>
+                    <td><span class="badge-tipo">${escapeHtml(item.tipo_razon_social || '-')}</span></td>
+                    <td style="font-family: monospace;">${escapeHtml(item.cuit || '-')}</td>
+                    <td>${escapeHtml(item.ubicacion || item.ciudad || '-')}</td>
+                    <td>
+                        <div style="font-weight: 500;">${escapeHtml(item.email_principal || '')}</div>
+                        <div style="font-size: 0.78rem; color: var(--text-muted);">${escapeHtml(item.telefono_principal || '')}</div>
+                    </td>
+                    <td>${escapeHtml(item.fecha_apertura || '-')}</td>
+                    <td style="font-weight: 600;">${escapeHtml(item.sup_total ? item.sup_total + ' m²' : '-')}</td>
+                </tr>
+            `).join('');
+        }
+
+        function updateStats(list) {
+            document.getElementById('stat-total').innerText = list.length;
+            if (list.length > 0) {
+                const latest = list[list.length - 1];
+                document.getElementById('stat-last').innerText = latest.nombre_concesionario || latest.solicitud_nro;
+                
+                let totalSup = 0;
+                list.forEach(i => {
+                    const sup = parseFloat(i.sup_total) || 0;
+                    totalSup += sup;
+                });
+                document.getElementById('stat-sup').innerText = totalSup.toLocaleString('es-AR') + ' m²';
+            } else {
+                document.getElementById('stat-last').innerText = '-';
+                document.getElementById('stat-sup').innerText = '0 m²';
+            }
+        }
+
+        function filterTable() {
+            const query = document.getElementById('search-box').value.toLowerCase().trim();
+            if (!query) {
+                renderTable(submissionsData);
+                return;
+            }
+
+            const filtered = submissionsData.filter(item => {
+                return (item.nombre_concesionario || '').toLowerCase().includes(query) ||
+                       (item.razon_social || '').toLowerCase().includes(query) ||
+                       (item.cuit || '').toLowerCase().includes(query) ||
+                       (item.solicitud_nro || '').toLowerCase().includes(query) ||
+                       (item.ubicacion || '').toLowerCase().includes(query) ||
+                       (item.ciudad || '').toLowerCase().includes(query);
+            });
+
+            renderTable(filtered);
+        }
+
+        function escapeHtml(str) {
+            return String(str).replace(/[&<>"']/g, function(m) {
+                return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[m];
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', init);
+    </script>
+</body>
+</html>

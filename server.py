@@ -231,10 +231,28 @@ def download_pdf(filename):
     # Vercel needs to serve files from /tmp since the root is read-only
     return send_from_directory("/tmp", filename)
 
+@app.route('/api/admin/submissions', methods=['GET'])
+def get_admin_submissions():
+    """Fetch submissions from Google Apps Script or return fallback."""
+    if not GOOGLE_SHEET_WEBHOOK_URL:
+        return jsonify({"submissions": []})
+    try:
+        res = requests.get(GOOGLE_SHEET_WEBHOOK_URL, timeout=8)
+        if res.status_code == 200:
+            data = res.json()
+            return jsonify(data)
+    except Exception as e:
+        logging.warning(f"Error fetching from Google Sheets: {e}")
+    return jsonify({"submissions": []})
+
 # Serve Static files from the current folder
 @app.route('/')
 def index():
     return send_from_directory(BASE_DIR, 'index.html')
+
+@app.route('/admin')
+def admin_panel():
+    return send_from_directory(BASE_DIR, 'admin.html')
 
 @app.route('/<path:filename>')
 def serve_static(filename):
