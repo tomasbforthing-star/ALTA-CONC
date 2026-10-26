@@ -4,9 +4,17 @@ import logging
 from datetime import datetime
 from flask import Flask, request, jsonify, send_from_directory
 
+import requests
+
 # Import local modules
 from pdf_generator import generate_final_pdf
 from email_sender import prepare_and_send_email
+
+# Google Sheets Webhook URL
+GOOGLE_SHEET_WEBHOOK_URL = os.environ.get(
+    "GOOGLE_SHEET_WEBHOOK_URL",
+    "https://script.google.com/macros/s/AKfycbwsXGLAlTXjnuzh6V3w9ktLXAvZbEpkVNlpHVwG1T4uhZ7HY0uVJNdI75__Qim7Rpp_tA/exec"
+)
 
 # Configure Logger (Vercel captures stdout, file handler removed to avoid read-only FS errors)
 logging.basicConfig(
@@ -151,6 +159,29 @@ def submit_onboarding():
     except Exception as email_err:
         email_error_msg = str(email_err)
         logging.warning(f"Submission {solicitud_nro} generated PDF successfully, but SMTP email dispatch failed: {email_err}. Backup EML saved locally.")
+
+    # 7. Sync to Google Sheets
+    if GOOGLE_SHEET_WEBHOOK_URL:
+        try:
+            sheet_payload = {
+                "fecha": datetime.now().strftime("%d/%m/%Y %H:%M"),
+                "solicitud_nro": solicitud_nro,
+                "nombre_concesionario": data.get("nombre_concesionario", ""),
+                "razon_social": data.get("razon_social", ""),
+                "tipo_razon_social": data.get("tipo_razon_social", ""),
+                "cuit": data.get("cuit", ""),
+                "ciudad": data.get("ciudad", ""),
+                "provincia": data.get("provincia", ""),
+                "email_principal": data.get("email_principal", ""),
+                "telefono_principal": data.get("telefono_principal", ""),
+                "fecha_apertura": data.get("fecha_apertura", ""),
+                "redes_sociales": data.get("redes_sociales", ""),
+                "sup_total": data.get("sup_total", "")
+            }
+            res = requests.post(GOOGLE_SHEET_WEBHOOK_URL, json=sheet_payload, timeout=5)
+            logging.info(f"Google Sheets sync status: {res.status_code}")
+        except Exception as sheet_err:
+            logging.error(f"Failed to sync submission {solicitud_nro} to Google Sheets: {sheet_err}")
         
     import base64
     pdf_base64 = ""
