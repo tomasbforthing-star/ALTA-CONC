@@ -288,6 +288,13 @@ def index():
 def admin_panel():
     return send_from_directory(BASE_DIR, 'admin.html')
 
+@app.route('/<path:filename>', methods=['GET'])
+def serve_static(filename):
+    file_path = os.path.join(BASE_DIR, filename)
+    if os.path.exists(file_path) and os.path.isfile(file_path):
+        return send_from_directory(BASE_DIR, filename)
+    return jsonify({"error": "File not found", "file": filename}), 404
+
 
 if __name__ == '__main__':
     # Get port from environment or run on 8000
