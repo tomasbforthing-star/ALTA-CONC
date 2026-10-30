@@ -685,13 +685,18 @@ function resizeImage(file, maxWidth, maxHeight, quality) {
                 },
                 body: JSON.stringify(formData)
             })
-            .then(response => {
-                if (!response.ok) {
-                    return response.json().then(errData => {
-                        throw new Error(errData.details || errData.error || 'Falla en el procesamiento de la solicitud.');
-                    });
+            .then(async response => {
+                const text = await response.text();
+                let resData;
+                try {
+                    resData = JSON.parse(text);
+                } catch (e) {
+                    throw new Error(`Error en el servidor (${response.status}): ${text.slice(0, 150)}`);
                 }
-                return response.json();
+                if (!response.ok) {
+                    throw new Error(resData.details || resData.error || 'Falla en el procesamiento de la solicitud.');
+                }
+                return resData;
             })
             .then(resData => {
                 // Update modal details

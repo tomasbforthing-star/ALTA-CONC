@@ -77,6 +77,7 @@ def save_backup_payload(solicitud_nro, data):
 
 # API Endpoint to handle form submissions
 @app.route('/api/submit', methods=['POST'])
+@app.route('/submit', methods=['POST'])
 def submit_onboarding():
     data = request.get_json()
     if not data:
@@ -202,6 +203,7 @@ def submit_onboarding():
 
 
 @app.route('/api/debug')
+@app.route('/debug')
 def debug_server():
     try:
         files = []
@@ -227,11 +229,13 @@ def debug_server():
 
 
 @app.route('/api/download/<path:filename>')
+@app.route('/download/<path:filename>')
 def download_pdf(filename):
     # Vercel needs to serve files from /tmp since the root is read-only
     return send_from_directory("/tmp", filename)
 
 @app.route('/api/admin/submissions', methods=['GET'])
+@app.route('/admin/submissions', methods=['GET'])
 def get_admin_submissions():
     """Fetch submissions from Google Apps Script or return fallback."""
     if not GOOGLE_SHEET_WEBHOOK_URL:
