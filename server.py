@@ -270,10 +270,6 @@ def index():
 def admin_panel():
     return send_from_directory(BASE_DIR, 'admin.html')
 
-@app.route('/<path:filename>')
-def serve_static(filename):
-    return send_from_directory(BASE_DIR, filename)
-
 
 if __name__ == '__main__':
     # Get port from environment or run on 8000
