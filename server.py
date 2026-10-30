@@ -257,6 +257,7 @@ def not_found(e):
         "full_path": request.full_path,
         "url": request.url,
         "environ_path_info": request.environ.get("PATH_INFO"),
+        "headers": dict(request.headers),
         "available_rules": [str(rule) for rule in app.url_map.iter_rules()]
     }), 404
 
