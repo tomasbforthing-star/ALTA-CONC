@@ -249,6 +249,17 @@ def get_admin_submissions():
         logging.warning(f"Error fetching from Google Sheets: {e}")
     return jsonify({"submissions": []})
 
+@app.errorhandler(404)
+def not_found(e):
+    return jsonify({
+        "error": "404 Not Found",
+        "path": request.path,
+        "full_path": request.full_path,
+        "url": request.url,
+        "environ_path_info": request.environ.get("PATH_INFO"),
+        "available_rules": [str(rule) for rule in app.url_map.iter_rules()]
+    }), 404
+
 # Serve Static files from the current folder
 @app.route('/')
 def index():
