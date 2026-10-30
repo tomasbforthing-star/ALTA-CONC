@@ -26,6 +26,24 @@ logging.basicConfig(
 )
 
 app = Flask(__name__)
+
+class VercelPathMiddleware:
+    def __init__(self, wsgi_app):
+        self.wsgi_app = wsgi_app
+
+    def __call__(self, environ, start_response):
+        query = environ.get('QUERY_STRING', '')
+        from urllib.parse import parse_qs
+        qs = parse_qs(query)
+        if '__endpoint' in qs and qs['__endpoint']:
+            endpoint = qs['__endpoint'][0].lstrip('/')
+            environ['PATH_INFO'] = f"/api/{endpoint}"
+        elif 'path' in qs and qs['path']:
+            endpoint = qs['path'][0].lstrip('/')
+            environ['PATH_INFO'] = f"/api/{endpoint}"
+        return self.wsgi_app(environ, start_response)
+
+app.wsgi_app = VercelPathMiddleware(app.wsgi_app)
 BACKUP_FOLDER = "/tmp/temp_submissions"
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
